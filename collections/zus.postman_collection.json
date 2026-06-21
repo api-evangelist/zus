@@ -1,0 +1,524 @@
+{
+  "info": {
+    "_postman_id": "b1f7a2c4-3e8d-4a90-9c21-7f2e5a6b8d10",
+    "name": "Zus Health API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform. Authenticated with an OAuth2 Bearer access token.\n\nDocumentation: https://docs.zushealth.com",
+      "type": "text/plain"
+    }
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.zusapi.com",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://auth.zusapi.com",
+      "key": "authUrl"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Issue or exchange an OAuth2 access token.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{authUrl}}/oauth/token",
+              "host": [
+                "{{authUrl}}"
+              ],
+              "path": [
+                "oauth",
+                "token"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "urn:ietf:params:oauth:grant-type:token-exchange"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid profile email"
+                }
+              ]
+            },
+            "description": "Exchange credentials for a Zus access token. Supports authorization_code (PKCE) and RFC 8693 token-exchange grants. Tokens are valid for one hour."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Patient",
+      "item": [
+        {
+          "name": "Search Patient resources.",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fhir/Patient",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fhir",
+                "Patient"
+              ]
+            },
+            "description": "Search FHIR R4 Patient resources by identifier, name, or upid. Returns a searchset Bundle."
+          }
+        },
+        {
+          "name": "Create a Patient resource.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fhir/Patient",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fhir",
+                "Patient"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Patient\",\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Create a FHIR R4 Patient. Patient.active=true authorizes access to aggregated third-party data."
+          }
+        },
+        {
+          "name": "Read a Patient by id.",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fhir/Patient/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fhir",
+                "Patient",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "The logical id of the Patient."
+                }
+              ]
+            },
+            "description": "Read a FHIR R4 Patient by id."
+          }
+        },
+        {
+          "name": "Replace a Patient by id.",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              },
+              {
+                "key": "Zus-If-Match",
+                "value": ""
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fhir/Patient/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fhir",
+                "Patient",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Patient\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Replace a Patient. Version-aware writes via the Zus-If-Match header."
+          }
+        }
+      ]
+    },
+    {
+      "name": "FHIR",
+      "item": [
+        {
+          "name": "Search resources of a given FHIR R4 type.",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fhir/:resourceType",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fhir",
+                ":resourceType"
+              ],
+              "variable": [
+                {
+                  "key": "resourceType",
+                  "value": "Observation",
+                  "description": "The FHIR R4 resource type."
+                }
+              ]
+            },
+            "description": "Search any supported FHIR R4 resource type. Returns a searchset Bundle."
+          }
+        },
+        {
+          "name": "Create a resource of a given FHIR R4 type.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fhir/:resourceType",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fhir",
+                ":resourceType"
+              ],
+              "variable": [
+                {
+                  "key": "resourceType",
+                  "value": "Observation"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Create a resource of a given FHIR R4 type."
+          }
+        },
+        {
+          "name": "Read a resource by type and id.",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fhir/:resourceType/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fhir",
+                ":resourceType",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "resourceType",
+                  "value": "Observation"
+                },
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Read a resource by type and id."
+          }
+        },
+        {
+          "name": "Delete a resource by type and id.",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/fhir/:resourceType/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fhir",
+                ":resourceType",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "resourceType",
+                  "value": "Observation"
+                },
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Delete a resource by type and id."
+          }
+        },
+        {
+          "name": "Submit a FHIR transaction or batch Bundle.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fhir",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fhir"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Bundle\",\n  \"type\": \"transaction\",\n  \"entry\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Submit a FHIR R4 transaction or batch Bundle (up to 100 entries)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Patient History",
+      "item": [
+        {
+          "name": "Create a Patient History job.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/patient-history/jobs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "patient-history",
+                "jobs"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Submit a Patient History job to retrieve external data into the ZAP. Sets Patient.active=true."
+          }
+        },
+        {
+          "name": "List Patient History jobs.",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/patient-history/jobs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "patient-history",
+                "jobs"
+              ]
+            },
+            "description": "List Patient History jobs."
+          }
+        },
+        {
+          "name": "Retrieve a Patient History job.",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/patient-history/jobs/:jobId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "patient-history",
+                "jobs",
+                ":jobId"
+              ],
+              "variable": [
+                {
+                  "key": "jobId",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Retrieve a Patient History job by id."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "Read a DocumentReference by id.",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fhir/DocumentReference/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fhir",
+                "DocumentReference",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Read a FHIR R4 DocumentReference. Narrative text.div is treated as opaque."
+          }
+        },
+        {
+          "name": "Read a Binary resource by id.",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fhir/Binary/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fhir",
+                "Binary",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Read a FHIR R4 Binary resource. The base64 Binary.data payload is stored as submitted."
+          }
+        }
+      ]
+    }
+  ]
+}

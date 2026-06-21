@@ -1,0 +1,82 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Zus Health
+providerId: zus
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Health
+- FHIR
+- Interoperability
+- Patient Data
+- Healthcare
+- Plans
+description: >-
+  Zus Health uses a sales-led, contract-based commercial model. Access to the
+  Zus platform, the FHIR API, the Zus Aggregated Profile, Patient History data
+  retrieval, and embeddable components is arranged through a partnership
+  agreement rather than a public self-service price list. A sandbox
+  environment is available for development and evaluation. No public per-unit
+  pricing is published, so the entries below are not reconciled.
+notes: >-
+  No public pricing page exists; pricing is determined per agreement. Verify
+  all commercial terms directly with Zus Health sales during reconciliation.
+sources:
+- https://zushealth.com
+- https://zushealth.com/developers/
+- https://docs.zushealth.com
+plans:
+- id: zus-sandbox
+  name: Sandbox
+  type: free
+  description: >-
+    Sandbox environment (api.sandbox.zusapi.com) for development and
+    evaluation of the FHIR API, authentication flows, and components.
+  entries:
+  - label: Sandbox Access
+    name: sandbox
+    type: flat
+    metric: access
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: FHIR API
+  - name: Patient History
+  - name: Document Ingestion
+  - name: Zushooks
+  - name: Embeddable Components
+- id: zus-platform
+  name: Platform Partnership
+  type: enterprise
+  description: >-
+    Production access to the Zus shared health-data platform under a
+    negotiated partnership agreement covering data aggregation, the Zus
+    Aggregated Profile, network connectivity, and support.
+  entries:
+  - label: Partnership Agreement
+    name: partnership
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: FHIR R4 API
+  - name: Zus Aggregated Profile
+  - name: Patient History Retrieval
+  - name: Document Retrieval
+  - name: Subscriptions and Webhooks
+  - name: GraphQL FHIR Query Service
+  - name: Embeddable Components
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

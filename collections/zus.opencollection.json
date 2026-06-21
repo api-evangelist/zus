@@ -1,0 +1,321 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zus Health API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Issue or exchange an OAuth2 access token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://auth.zusapi.com/oauth/token",
+            "body": {
+              "type": "urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Exchange credentials for a Zus access token. Supports authorization_code (PKCE) and RFC 8693 token-exchange grants. Tokens are valid for one hour."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Patient",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Patient resources.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/Patient"
+          },
+          "docs": "Search FHIR R4 Patient resources by identifier, name, or upid. Returns a searchset Bundle."
+        },
+        {
+          "info": {
+            "name": "Create a Patient resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zusapi.com/fhir/Patient",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a FHIR R4 Patient. Patient.active=true authorizes access to aggregated third-party data."
+        },
+        {
+          "info": {
+            "name": "Read a Patient by id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/Patient/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The logical id of the Patient."
+              }
+            ]
+          },
+          "docs": "Read a FHIR R4 Patient by id."
+        },
+        {
+          "info": {
+            "name": "Replace a Patient by id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.zusapi.com/fhir/Patient/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The logical id of the Patient."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace a Patient. Version-aware writes via the Zus-If-Match header."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "FHIR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search resources of a given FHIR R4 type.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/:resourceType",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "Observation",
+                "type": "path",
+                "description": "The FHIR R4 resource type."
+              }
+            ]
+          },
+          "docs": "Search any supported FHIR R4 resource type. Returns a searchset Bundle."
+        },
+        {
+          "info": {
+            "name": "Create a resource of a given FHIR R4 type.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zusapi.com/fhir/:resourceType",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "Observation",
+                "type": "path",
+                "description": "The FHIR R4 resource type."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a resource of a given FHIR R4 type."
+        },
+        {
+          "info": {
+            "name": "Read a resource by type and id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/:resourceType/:id",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "Observation",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read a resource by type and id."
+        },
+        {
+          "info": {
+            "name": "Delete a resource by type and id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.zusapi.com/fhir/:resourceType/:id",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "Observation",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a resource by type and id."
+        },
+        {
+          "info": {
+            "name": "Submit a FHIR transaction or batch Bundle.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zusapi.com/fhir",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a FHIR R4 transaction or batch Bundle (up to 100 entries)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Patient History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Patient History job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zusapi.com/patient-history/jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a Patient History job to retrieve external data into the ZAP. Sets Patient.active=true."
+        },
+        {
+          "info": {
+            "name": "List Patient History jobs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/patient-history/jobs"
+          },
+          "docs": "List Patient History jobs."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Patient History job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/patient-history/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Patient History job by id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read a DocumentReference by id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/DocumentReference/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read a FHIR R4 DocumentReference. Narrative text.div is treated as opaque."
+        },
+        {
+          "info": {
+            "name": "Read a Binary resource by id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/Binary/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read a FHIR R4 Binary resource. The base64 Binary.data payload is stored as submitted."
+        }
+      ]
+    }
+  ]
+}

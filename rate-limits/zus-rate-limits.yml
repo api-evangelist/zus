@@ -1,0 +1,64 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Zus Health
+providerId: zus
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Health
+- FHIR
+- Interoperability
+- Patient Data
+- Healthcare
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Zus documents a rate limit on the OAuth2 token endpoint of 200 token
+  requests per hour per App Client for machine-to-machine flows; user
+  authentication via username and password is not subject to this limit. FHIR
+  search responses are paginated with a default page size of 10 resources,
+  expandable up to 500. Bundle transactions accept up to 100 entries. Broader
+  per-endpoint request rate limits for the FHIR API are not published and are
+  not reconciled in this artifact.
+notes: >-
+  Confirm any per-endpoint FHIR API request rate limits, burst behavior, and
+  Retry-After semantics directly with Zus Health during reconciliation. Only
+  the token endpoint limit and pagination/bundle bounds are publicly
+  documented.
+sources:
+- https://docs.zushealth.com/docs/user-authentication
+- https://docs.zushealth.com/docs/fhir-rest-api-capabilities
+responseCodes:
+  throttled: 429
+limits:
+- name: Token Endpoint Requests
+  scope: app-client
+  metric: requests
+  limit: 200 per hour
+  notes: Machine-to-machine token requests per App Client; user/password auth is exempt.
+- name: FHIR Search Page Size
+  scope: request
+  metric: resources
+  limit: 10 default, 500 maximum
+  notes: Default page size 10, expandable up to 500 via _count.
+- name: Bundle Entries
+  scope: request
+  metric: entries
+  limit: 100
+  notes: Maximum entries per FHIR transaction or batch Bundle.
+- name: FHIR API Request Rate
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Per-endpoint FHIR request rate limits are not publicly documented.
+policies:
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Token Reuse
+  description: Access tokens are valid for one hour (expires_in 3600); reuse tokens rather than re-minting to stay within the token endpoint limit.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

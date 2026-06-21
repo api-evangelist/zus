@@ -1,0 +1,91 @@
+aid: zus
+name: Zus Health
+review:
+  question: Does Zus Health expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Zus does not document a WebSocket,
+    Server-Sent Events (SSE), or other persistent streaming transport. Its
+    event-driven surface is Zushooks - outbound HTTPS webhook callbacks that
+    Zus sends to a client-hosted endpoint - which is a request/response
+    push model rather than a streaming protocol modeled by AsyncAPI in this
+    catalog's current scope.
+findings:
+  summary: |
+    Zus Health does not publish a documented public WebSocket API. The Zus
+    platform exposes a FHIR R4 (v4.0.1) REST API under https://api.zusapi.com
+    (sandbox https://api.sandbox.zusapi.com), an OAuth2 token endpoint under
+    https://auth.zusapi.com/oauth/token (sandbox auth.sandbox.zusapi.com), a
+    Patient History jobs REST API, document ingestion/retrieval via FHIR
+    DocumentReference and Binary, and a GraphQL FHIR Query Service. Real-time
+    data activity is delivered via Zushooks - outbound HTTPS webhook callbacks
+    configured through a Zus support ticket and authenticated with basic auth
+    or OAuth client credentials. No realtime, bidirectional WebSocket (ws:// or
+    wss://) endpoint is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.zusapi.com
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.sandbox.zusapi.com
+      documented: true
+      note: Sandbox environment.
+    - protocol: GraphQL
+      scheme: https
+      baseURL: https://api.zusapi.com/fqs/query
+      documented: true
+      note: Zus FHIR Query Service (FQS); documented at fqs-docs.zusapi.com.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Zushooks deliver outbound HTTPS callbacks to a client-hosted URL on FHIR data create/update activity. Configured via Zus support ticket, not a self-service API.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the Zus API reference, FHIR API, authentication, or Zushooks documentation as of the review date.
+  endpointsConfirmedRest:
+    - POST https://auth.zusapi.com/oauth/token
+    - GET  https://api.zusapi.com/fhir/Patient
+    - POST https://api.zusapi.com/fhir/Patient
+    - GET  https://api.zusapi.com/fhir/Patient/{id}
+    - PUT  https://api.zusapi.com/fhir/Patient/{id}
+    - GET  https://api.zusapi.com/fhir/{resourceType}
+    - POST https://api.zusapi.com/fhir/{resourceType}
+    - GET  https://api.zusapi.com/fhir/{resourceType}/{id}
+    - DELETE https://api.zusapi.com/fhir/{resourceType}/{id}
+    - POST https://api.zusapi.com/fhir
+    - POST https://api.zusapi.com/patient-history/jobs
+    - GET  https://api.zusapi.com/patient-history/jobs
+    - GET  https://api.zusapi.com/patient-history/jobs/{jobId}
+    - GET  https://api.zusapi.com/fhir/DocumentReference/{id}
+    - GET  https://api.zusapi.com/fhir/Binary/{id}
+sources:
+  - url: https://docs.zushealth.com/reference/general
+    type: APIReference
+    note: API reference overview; lists Auth Service, Patient History, and FHIR API categories. All HTTPS REST.
+  - url: https://docs.zushealth.com/docs/fhir-rest-api-capabilities
+    type: Documentation
+    note: FHIR R4 (v4.0.1) capabilities; read/search/create/update/patch/delete, Bundles up to 100 entries, page size 10-500. No WebSocket.
+  - url: https://docs.zushealth.com/docs/user-authentication
+    type: Documentation
+    note: OAuth2 token endpoint (auth.sandbox.zusapi.com/oauth/token), authorization_code with PKCE and RFC 8693 token-exchange, Bearer tokens valid 1 hour, 200 token requests/hour per App Client.
+  - url: https://docs.zushealth.com/docs/zushooks
+    type: Documentation
+    note: Zushooks are outbound HTTPS webhook callbacks, not WebSocket. Configured via support ticket with JQ filters and basic/OAuth auth.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. The event-driven surface (Zushooks)
+    is an outbound HTTPS webhook push, not a streaming transport, so no
+    AsyncAPI document was authored. The apis.yml models the REST FHIR
+    surfaces, Patient History, document retrieval, and the subscriptions/
+    webhooks product accurately.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
