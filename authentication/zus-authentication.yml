@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/zus-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: 'OAuth2 Bearer access token obtained from the Zus token endpoint (auth.zusapi.com/oauth/token).
+    Sent as Authorization: Bearer <ACCESS_TOKEN>.'
+  sources:
+  - openapi/zus-openapi.yml

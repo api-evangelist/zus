@@ -113,6 +113,10 @@ apis:
     and status changes - filtered by JQ criteria and authenticated with basic auth
     or OAuth client credentials.
 common:
+- type: DomainSecurity
+  url: security/zus-domain-security.yml
+- type: Authentication
+  url: authentication/zus-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/zushealth
 - type: Website
@@ -125,6 +129,8 @@ common:
   url: rate-limits/zus-rate-limits.yml
 - type: FinOps
   url: finops/zus-finops.yml
+- url: https://zushealth.com/feed/
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
