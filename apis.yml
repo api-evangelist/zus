@@ -113,6 +113,8 @@ apis:
     and status changes - filtered by JQ criteria and authenticated with basic auth
     or OAuth client credentials.
 common:
+- type: AgenticAccess
+  url: agentic-access/zus-agentic-access.yml
 - type: DomainSecurity
   url: security/zus-domain-security.yml
 - type: Authentication
