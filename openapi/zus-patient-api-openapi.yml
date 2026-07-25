@@ -1,0 +1,175 @@
+openapi: 3.0.1
+info:
+  title: Zus Health Auth Patient API
+  description: FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform. Provides access to Patient resources, the Zus Aggregated Profile (ZAP) via Patient History jobs, general FHIR resources, document ingestion and retrieval through DocumentReference and Binary, and OAuth2 token issuance. All requests are authenticated with an OAuth2 Bearer access token. Endpoints and behavior are derived from the public Zus documentation at https://docs.zushealth.com; production hostnames use api.zusapi.com and the sandbox uses api.sandbox.zusapi.com / auth.sandbox.zusapi.com.
+  termsOfService: https://zushealth.com
+  contact:
+    name: Zus Health
+    url: https://docs.zushealth.com
+  version: '1.0'
+servers:
+- url: https://api.zusapi.com
+  description: Production
+- url: https://api.sandbox.zusapi.com
+  description: Sandbox
+security:
+- bearerAuth: []
+tags:
+- name: Patient
+  description: FHIR R4 Patient resources.
+paths:
+  /fhir/Patient:
+    get:
+      operationId: searchPatients
+      tags:
+      - Patient
+      summary: Search Patient resources.
+      description: Search FHIR R4 Patient resources. Supports search parameters including identifier, name, and the Zus universal patient identifier (upid). Returns a FHIR searchset Bundle. Default page size is 10 and can be expanded up to 500.
+      parameters:
+      - name: identifier
+        in: query
+        schema:
+          type: string
+        description: Token search on a Patient identifier (system|value).
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: upid
+        in: query
+        schema:
+          type: string
+        description: Zus universal patient identifier.
+      - name: _count
+        in: query
+        schema:
+          type: integer
+          default: 10
+          maximum: 500
+      responses:
+        '200':
+          description: A FHIR searchset Bundle.
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Bundle'
+    post:
+      operationId: createPatient
+      tags:
+      - Patient
+      summary: Create a Patient resource.
+      description: Create a FHIR R4 Patient. Setting Patient.active to true is the primary signal of an active treatment relationship and authorizes access to the patient's aggregated third-party data. Zus interprets a NULL value for Patient.active as false.
+      requestBody:
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        '201':
+          description: Patient created.
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+  /fhir/Patient/{id}:
+    get:
+      operationId: readPatient
+      tags:
+      - Patient
+      summary: Read a Patient by id.
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: The requested Patient resource.
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '404':
+          description: Patient not found.
+    put:
+      operationId: updatePatient
+      tags:
+      - Patient
+      summary: Replace a Patient by id.
+      description: Replace an existing Patient. Version-aware writes are supported via the Zus-If-Match header.
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      - name: Zus-If-Match
+        in: header
+        schema:
+          type: string
+        description: Version-aware write precondition.
+      requestBody:
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        '200':
+          description: Patient updated.
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+components:
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The logical id of the resource.
+  schemas:
+    Patient:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          example: Patient
+        id:
+          type: string
+        active:
+          type: boolean
+          description: Primary signal of an active treatment relationship. Zus interprets NULL as false.
+        identifier:
+          type: array
+          items:
+            type: object
+        name:
+          type: array
+          items:
+            type: object
+        gender:
+          type: string
+          description: administrative-gender; value set strictly enforced.
+        birthDate:
+          type: string
+          format: date
+      additionalProperties: true
+    Bundle:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          example: Bundle
+        type:
+          type: string
+          example: searchset
+        total:
+          type: integer
+        entry:
+          type: array
+          items:
+            type: object
+      additionalProperties: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 Bearer access token obtained from the Zus token endpoint (auth.zusapi.com/oauth/token). Sent as Authorization: Bearer <ACCESS_TOKEN>.'

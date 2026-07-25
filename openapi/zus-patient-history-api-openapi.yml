@@ -1,0 +1,97 @@
+openapi: 3.0.1
+info:
+  title: Zus Health Auth Patient History API
+  description: FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform. Provides access to Patient resources, the Zus Aggregated Profile (ZAP) via Patient History jobs, general FHIR resources, document ingestion and retrieval through DocumentReference and Binary, and OAuth2 token issuance. All requests are authenticated with an OAuth2 Bearer access token. Endpoints and behavior are derived from the public Zus documentation at https://docs.zushealth.com; production hostnames use api.zusapi.com and the sandbox uses api.sandbox.zusapi.com / auth.sandbox.zusapi.com.
+  termsOfService: https://zushealth.com
+  contact:
+    name: Zus Health
+    url: https://docs.zushealth.com
+  version: '1.0'
+servers:
+- url: https://api.zusapi.com
+  description: Production
+- url: https://api.sandbox.zusapi.com
+  description: Sandbox
+security:
+- bearerAuth: []
+tags:
+- name: Patient History
+  description: Jobs that retrieve external data into the Zus Aggregated Profile.
+paths:
+  /patient-history/jobs:
+    post:
+      operationId: createPatientHistoryJob
+      tags:
+      - Patient History
+      summary: Create a Patient History job.
+      description: Submit a Patient History job to retrieve a patient's clinical data from Zus network partners into the FHIR Store, populating the Zus Aggregated Profile (ZAP). Submitting a Patient History request sets Patient.active to true for the patient.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientHistoryJobRequest'
+      responses:
+        '201':
+          description: Job created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientHistoryJob'
+    get:
+      operationId: listPatientHistoryJobs
+      tags:
+      - Patient History
+      summary: List Patient History jobs.
+      responses:
+        '200':
+          description: A list of Patient History jobs.
+  /patient-history/jobs/{jobId}:
+    get:
+      operationId: getPatientHistoryJob
+      tags:
+      - Patient History
+      summary: Retrieve a Patient History job.
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requested Patient History job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientHistoryJob'
+components:
+  schemas:
+    PatientHistoryJob:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          example: running
+        patient:
+          type: object
+    PatientHistoryJobRequest:
+      type: object
+      properties:
+        patient:
+          type: object
+          description: Reference to the FHIR Patient the job is run for.
+        practitioner:
+          type: object
+          description: Reference to the requesting Practitioner.
+        config:
+          type: object
+          description: Job configuration options.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 Bearer access token obtained from the Zus token endpoint (auth.zusapi.com/oauth/token). Sent as Authorization: Bearer <ACCESS_TOKEN>.'

@@ -1,0 +1,169 @@
+openapi: 3.0.1
+info:
+  title: Zus Health Auth FHIR API
+  description: FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform. Provides access to Patient resources, the Zus Aggregated Profile (ZAP) via Patient History jobs, general FHIR resources, document ingestion and retrieval through DocumentReference and Binary, and OAuth2 token issuance. All requests are authenticated with an OAuth2 Bearer access token. Endpoints and behavior are derived from the public Zus documentation at https://docs.zushealth.com; production hostnames use api.zusapi.com and the sandbox uses api.sandbox.zusapi.com / auth.sandbox.zusapi.com.
+  termsOfService: https://zushealth.com
+  contact:
+    name: Zus Health
+    url: https://docs.zushealth.com
+  version: '1.0'
+servers:
+- url: https://api.zusapi.com
+  description: Production
+- url: https://api.sandbox.zusapi.com
+  description: Sandbox
+security:
+- bearerAuth: []
+tags:
+- name: FHIR
+  description: General FHIR R4 resources.
+paths:
+  /fhir/{resourceType}:
+    get:
+      operationId: searchResources
+      tags:
+      - FHIR
+      summary: Search resources of a given FHIR R4 type.
+      description: Search any supported FHIR R4 resource type (140+ types including Observation, Condition, Encounter, MedicationStatement, Procedure, DiagnosticReport, DocumentReference, and Binary). Returns a searchset Bundle.
+      parameters:
+      - name: resourceType
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Observation
+      - name: patient
+        in: query
+        schema:
+          type: string
+      - name: _count
+        in: query
+        schema:
+          type: integer
+          default: 10
+          maximum: 500
+      responses:
+        '200':
+          description: A FHIR searchset Bundle.
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Bundle'
+    post:
+      operationId: createResource
+      tags:
+      - FHIR
+      summary: Create a resource of a given FHIR R4 type.
+      parameters:
+      - name: resourceType
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              $ref: '#/components/schemas/Resource'
+      responses:
+        '201':
+          description: Resource created.
+  /fhir/{resourceType}/{id}:
+    get:
+      operationId: readResource
+      tags:
+      - FHIR
+      summary: Read a resource by type and id.
+      parameters:
+      - name: resourceType
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: The requested resource.
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '404':
+          description: Resource not found.
+    delete:
+      operationId: deleteResource
+      tags:
+      - FHIR
+      summary: Delete a resource by type and id.
+      parameters:
+      - name: resourceType
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Resource deleted.
+  /fhir:
+    post:
+      operationId: submitBundle
+      tags:
+      - FHIR
+      summary: Submit a FHIR transaction or batch Bundle.
+      description: Submit a FHIR R4 transaction or batch Bundle (up to 100 entries). Supports conditional create, update, and delete by identifier.
+      requestBody:
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              $ref: '#/components/schemas/Bundle'
+      responses:
+        '200':
+          description: A transaction-response or batch-response Bundle.
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Bundle'
+components:
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The logical id of the resource.
+  schemas:
+    Resource:
+      type: object
+      description: A generic FHIR R4 resource.
+      properties:
+        resourceType:
+          type: string
+        id:
+          type: string
+      additionalProperties: true
+    Bundle:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          example: Bundle
+        type:
+          type: string
+          example: searchset
+        total:
+          type: integer
+        entry:
+          type: array
+          items:
+            type: object
+      additionalProperties: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 Bearer access token obtained from the Zus token endpoint (auth.zusapi.com/oauth/token). Sent as Authorization: Bearer <ACCESS_TOKEN>.'
