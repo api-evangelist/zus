@@ -7,7 +7,20 @@ description: Zus Health is a shared health-data platform that aggregates a patie
   exposes a FHIR R4 (v4.0.1) REST API secured with OAuth2 Bearer tokens, Patient History
   APIs, document ingestion and retrieval, Zushooks webhooks, a GraphQL FHIR Query
   Service, and embeddable open-source React components.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/zus.png
 tags:
 - Health
 - FHIR
@@ -18,100 +31,126 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.19'
 apis:
-- aid: zus:patients-fhir
-  name: Zus Patients (FHIR)
-  tags:
-  - Patient
-  - FHIR
-  - Identity
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: zus:zus-auth-api
+  name: Zus Health Auth API
+  description: OAuth2 token issuance and exchange.
   humanURL: https://docs.zushealth.com/docs/fhir-api
   baseURL: https://api.zusapi.com/fhir
-  properties:
-  - url: https://docs.zushealth.com/docs/fhir-api
-    type: Documentation
-  - url: https://docs.zushealth.com/reference/general
-    type: APIReference
-  - url: openapi/zus-openapi.yml
-    type: OpenAPI
-  description: Read, search, create, and update FHIR R4 Patient resources. The Patient.active
-    field is the primary signal of an active treatment relationship and authorizes
-    access to a patient's aggregated third-party data.
-- aid: zus:aggregated-profile
-  name: Zus Aggregated Profile
   tags:
-  - ZAP
-  - Aggregation
-  - Patient History
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.zushealth.com/docs/accessing-the-zap
-  baseURL: https://api.zusapi.com
+  - Auth
   properties:
-  - url: https://docs.zushealth.com/docs/accessing-the-zap
-    type: Documentation
-  - url: https://docs.zushealth.com/docs/zap-basics
-    type: Documentation
-  - url: openapi/zus-openapi.yml
-    type: OpenAPI
-  description: The Zus Aggregated Profile (ZAP) assembles a longitudinal record from
-    network partners. Patient History jobs retrieve external data into the FHIR Store,
-    where it is deduplicated and summarized by Zus Lens.
-- aid: zus:fhir-resources
-  name: Zus FHIR Resources
-  tags:
-  - FHIR
-  - Resources
-  - R4
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.zushealth.com/docs/fhir-rest-api-capabilities
+  - type: OpenAPI
+    url: openapi/zus-auth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/fhir-api
+  - type: APIReference
+    url: https://docs.zushealth.com/reference/general
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/accessing-the-zap
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/zap-basics
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/fhir-rest-api-capabilities
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/ingesting-documents
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/zushooks
+- aid: zus:zus-documents-api
+  name: Zus Health Documents API
+  description: DocumentReference and Binary resources.
+  humanURL: https://docs.zushealth.com/docs/fhir-api
   baseURL: https://api.zusapi.com/fhir
-  properties:
-  - url: https://docs.zushealth.com/docs/fhir-rest-api-capabilities
-    type: Documentation
-  - url: https://docs.zushealth.com/reference/general
-    type: APIReference
-  - url: openapi/zus-openapi.yml
-    type: OpenAPI
-  description: Store and retrieve most FHIR R4 (v4.0.1) resource types - Observation,
-    Condition, Encounter, MedicationStatement, Procedure, DiagnosticReport, and more
-    - with read, search, create, update, patch, delete, and Bundle transactions.
-- aid: zus:document-retrieval
-  name: Zus Document Retrieval
   tags:
   - Documents
-  - DocumentReference
-  - Binary
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.zushealth.com/docs/ingesting-documents
+  properties:
+  - type: OpenAPI
+    url: openapi/zus-documents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/fhir-api
+  - type: APIReference
+    url: https://docs.zushealth.com/reference/general
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/accessing-the-zap
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/zap-basics
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/fhir-rest-api-capabilities
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/ingesting-documents
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/zushooks
+- aid: zus:zus-fhir-api
+  name: Zus Health FHIR API
+  description: General FHIR R4 resources.
+  humanURL: https://docs.zushealth.com/docs/fhir-api
   baseURL: https://api.zusapi.com/fhir
-  properties:
-  - url: https://docs.zushealth.com/docs/ingesting-documents
-    type: Documentation
-  - url: https://docs.zushealth.com/reference/general
-    type: APIReference
-  - url: openapi/zus-openapi.yml
-    type: OpenAPI
-  description: Ingest CDA and PDF documents and retrieve clinical documents through
-    the FHIR DocumentReference and Binary resources, including base64-encoded payloads
-    stored as submitted.
-- aid: zus:subscriptions-webhooks
-  name: Zus Subscriptions and Webhooks
   tags:
-  - Webhooks
-  - Subscriptions
-  - Zushooks
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.zushealth.com/docs/zushooks
-  baseURL: https://api.zusapi.com
+  - FHIR
   properties:
-  - url: https://docs.zushealth.com/docs/zushooks
-    type: Documentation
-  - url: openapi/zus-openapi.yml
-    type: OpenAPI
-  description: Zushooks deliver inbound HTTPS callbacks when patient data is created
-    or updated in the Zus FHIR Store - ADT events, medication pickups, lab results,
-    and status changes - filtered by JQ criteria and authenticated with basic auth
-    or OAuth client credentials.
+  - type: OpenAPI
+    url: openapi/zus-fhir-api-openapi.yml
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/fhir-api
+  - type: APIReference
+    url: https://docs.zushealth.com/reference/general
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/accessing-the-zap
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/zap-basics
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/fhir-rest-api-capabilities
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/ingesting-documents
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/zushooks
+- aid: zus:zus-patient-api
+  name: Zus Health Patient API
+  description: FHIR R4 Patient resources.
+  humanURL: https://docs.zushealth.com/docs/fhir-api
+  baseURL: https://api.zusapi.com/fhir
+  tags:
+  - Patient
+  properties:
+  - type: OpenAPI
+    url: openapi/zus-patient-api-openapi.yml
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/fhir-api
+  - type: APIReference
+    url: https://docs.zushealth.com/reference/general
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/accessing-the-zap
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/zap-basics
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/fhir-rest-api-capabilities
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/ingesting-documents
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/zushooks
+- aid: zus:zus-patient-history-api
+  name: Zus Health Patient History API
+  description: Jobs that retrieve external data into the Zus Aggregated Profile.
+  humanURL: https://docs.zushealth.com/docs/fhir-api
+  baseURL: https://api.zusapi.com/fhir
+  tags:
+  - Patient History
+  properties:
+  - type: OpenAPI
+    url: openapi/zus-patient-history-api-openapi.yml
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/fhir-api
+  - type: APIReference
+    url: https://docs.zushealth.com/reference/general
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/accessing-the-zap
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/zap-basics
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/fhir-rest-api-capabilities
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/ingesting-documents
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/zushooks
 common:
 - type: AgenticAccess
   url: agentic-access/zus-agentic-access.yml
