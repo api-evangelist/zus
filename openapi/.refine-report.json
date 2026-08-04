@@ -1,0 +1,22 @@
+{
+  "provider": "zus",
+  "sources": [
+    "zus-auth-api-openapi.yml",
+    "zus-documents-api-openapi.yml",
+    "zus-fhir-api-openapi.yml",
+    "zus-patient-api-openapi.yml",
+    "zus-patient-history-api-openapi.yml"
+  ],
+  "outputs": [
+    "zus-auth-api-openapi.yml",
+    "zus-documents-api-openapi.yml",
+    "zus-fhir-api-openapi.yml",
+    "zus-patient-api-openapi.yml",
+    "zus-patient-history-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
