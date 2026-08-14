@@ -1,0 +1,304 @@
+{
+  "item": [
+    {
+      "id": "2d996582-e15f-474f-bfde-670817cac3cd",
+      "name": "Patient History",
+      "description": {
+        "content": "Jobs that retrieve external data into the Zus Aggregated Profile.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7b4c795e-f903-480f-9212-c19d53426b12",
+          "name": "Create a Patient History job.",
+          "request": {
+            "name": "Create a Patient History job.",
+            "description": {
+              "content": "Submit a Patient History job to retrieve a patient's clinical data from Zus network partners into the FHIR Store, populating the Zus Aggregated Profile (ZAP). Submitting a Patient History request sets Patient.active to true for the patient.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patient-history",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient\": \"<object>\",\n  \"practitioner\": \"<object>\",\n  \"config\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8cb66e20-7e05-4440-a26b-02c25792f4a4",
+              "name": "Job created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patient-history",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"patient\": \"<object>\",\n  \"practitioner\": \"<object>\",\n  \"config\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"running\",\n  \"patient\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "238f1037-f5fe-4e61-99be-f7fe0d19d379",
+          "name": "List Patient History jobs.",
+          "request": {
+            "name": "List Patient History jobs.",
+            "description": {},
+            "url": {
+              "path": [
+                "patient-history",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3f176ab-9574-4448-bddd-06d6da939219",
+              "name": "A list of Patient History jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patient-history",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d072a2bf-2018-4536-a8d4-fb9bebfe7868",
+          "name": "Retrieve a Patient History job.",
+          "request": {
+            "name": "Retrieve a Patient History job.",
+            "description": {},
+            "url": {
+              "path": [
+                "patient-history",
+                "jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffaf1a89-7e83-48e5-a6ff-fc4cc72bda2b",
+              "name": "The requested Patient History job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patient-history",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"running\",\n  \"patient\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.zusapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "17dbbba1-b3f4-4f43-830d-bee4d2c97d4f",
+    "name": "Zus Health Auth Patient History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform. Provides access to Patient resources, the Zus Aggregated Profile (ZAP) via Patient History jobs, general FHIR resources, document ingestion and retrieval through DocumentReference and Binary, and OAuth2 token issuance. All requests are authenticated with an OAuth2 Bearer access token. Endpoints and behavior are derived from the public Zus documentation at https://docs.zushealth.com; production hostnames use api.zusapi.com and the sandbox uses api.sandbox.zusapi.com / auth.sandbox.zusapi.com.\n\nContact Support:\n Name: Zus Health",
+      "type": "text/plain"
+    }
+  }
+}

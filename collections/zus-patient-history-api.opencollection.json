@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zus Health Auth Patient History API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Patient History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Patient History jobs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/patient-history/jobs"
+          },
+          "docs": "List Patient History jobs."
+        },
+        {
+          "info": {
+            "name": "Create a Patient History job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zusapi.com/patient-history/jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a Patient History job to retrieve a patient's clinical data from Zus network partners into the FHIR Store, populating the Zus Aggregated Profile (ZAP). Submitting a Patient History request sets Patient.active to true for the patient."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Patient History job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/patient-history/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Patient History job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

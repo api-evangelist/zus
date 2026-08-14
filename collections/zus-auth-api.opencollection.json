@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zus Health Auth API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Issue or exchange an OAuth2 access token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zusapi.com/oauth/token",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Exchange credentials for a Zus access token. Supports the authorization_code (with PKCE) grant and the RFC 8693 token-exchange grant (grant_type urn:ietf:params:oauth:grant-type:token-exchange) for exchanging a third-party IdP ID token. Access tokens are valid for one hour (expires_in 3600). The token endpoint is rate limited to 200 requests per hour per App Client."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zus Health Auth FHIR API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "FHIR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search resources of a given FHIR R4 type.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/:resourceType",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "Observation",
+                "type": "path"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search any supported FHIR R4 resource type (140+ types including Observation, Condition, Encounter, MedicationStatement, Procedure, DiagnosticReport, DocumentReference, and Binary). Returns a searchset Bundle."
+        },
+        {
+          "info": {
+            "name": "Create a resource of a given FHIR R4 type.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zusapi.com/fhir/:resourceType",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a resource of a given FHIR R4 type."
+        },
+        {
+          "info": {
+            "name": "Read a resource by type and id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/:resourceType/:id",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The logical id of the resource."
+              }
+            ]
+          },
+          "docs": "Read a resource by type and id."
+        },
+        {
+          "info": {
+            "name": "Delete a resource by type and id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.zusapi.com/fhir/:resourceType/:id",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The logical id of the resource."
+              }
+            ]
+          },
+          "docs": "Delete a resource by type and id."
+        },
+        {
+          "info": {
+            "name": "Submit a FHIR transaction or batch Bundle.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zusapi.com/fhir",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a FHIR R4 transaction or batch Bundle (up to 100 entries). Supports conditional create, update, and delete by identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

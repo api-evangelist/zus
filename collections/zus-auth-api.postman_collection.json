@@ -1,0 +1,321 @@
+{
+  "item": [
+    {
+      "id": "11c01fff-26bb-4378-b483-6bce12eee26e",
+      "name": "Auth",
+      "description": {
+        "content": "OAuth2 token issuance and exchange.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e4863cdb-70ac-46ce-8a57-e84c4e55c0c8",
+          "name": "Issue or exchange an OAuth2 access token.",
+          "request": {
+            "name": "Issue or exchange an OAuth2 access token.",
+            "description": {
+              "content": "Exchange credentials for a Zus access token. Supports the authorization_code (with PKCE) grant and the RFC 8693 token-exchange grant (grant_type urn:ietf:params:oauth:grant-type:token-exchange) for exchanging a third-party IdP ID token. Access tokens are valid for one hour (expires_in 3600). The token endpoint is rate limited to 200 requests per hour per App Client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oauth",
+                "token"
+              ],
+              "host": [
+                "{{oauth-token-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "grant_type",
+                  "value": "<string>",
+                  "description": "(Required) authorization_code or urn:ietf:params:oauth:grant-type:token-exchange."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "code_verifier",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "redirect_uri",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject_token",
+                  "value": "<string>",
+                  "description": "Third-party IdP ID token (token-exchange grant)."
+                },
+                {
+                  "disabled": false,
+                  "key": "subject_token_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "19531051-4521-463b-a3d1-cd5f43c5b88b",
+              "name": "Access token issued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{oauth-token-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) authorization_code or urn:ietf:params:oauth:grant-type:token-exchange.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "code_verifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "redirect_uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Third-party IdP ID token (token-exchange grant).",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "subject_token_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "scope",
+                      "value": "openid profile email"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600,\n  \"scope\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4cdd1a4-dc9a-4f12-b493-c49ce971d8f8",
+              "name": "Invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{oauth-token-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) authorization_code or urn:ietf:params:oauth:grant-type:token-exchange.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "code_verifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "redirect_uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Third-party IdP ID token (token-exchange grant).",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "subject_token_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "scope",
+                      "value": "openid profile email"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.zusapi.com",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://auth.zusapi.com",
+      "key": "oauth-token-Url"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9f04b98b-3d8a-417f-b61d-d7d20816be13",
+    "name": "Zus Health Auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform. Provides access to Patient resources, the Zus Aggregated Profile (ZAP) via Patient History jobs, general FHIR resources, document ingestion and retrieval through DocumentReference and Binary, and OAuth2 token issuance. All requests are authenticated with an OAuth2 Bearer access token. Endpoints and behavior are derived from the public Zus documentation at https://docs.zushealth.com; production hostnames use api.zusapi.com and the sandbox uses api.sandbox.zusapi.com / auth.sandbox.zusapi.com.\n\nContact Support:\n Name: Zus Health",
+      "type": "text/plain"
+    }
+  }
+}

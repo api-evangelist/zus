@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zus Health Auth Patient API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Patient",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Patient resources.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/Patient",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query",
+                "description": "Token search on a Patient identifier (system|value)."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "upid",
+                "value": "",
+                "type": "query",
+                "description": "Zus universal patient identifier."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search FHIR R4 Patient resources. Supports search parameters including identifier, name, and the Zus universal patient identifier (upid). Returns a FHIR searchset Bundle. Default page size is 10 and can be expanded up to 500."
+        },
+        {
+          "info": {
+            "name": "Create a Patient resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zusapi.com/fhir/Patient",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a FHIR R4 Patient. Setting Patient.active to true is the primary signal of an active treatment relationship and authorizes access to the patient's aggregated third-party data. Zus interprets a NULL value for Patient.active as false."
+        },
+        {
+          "info": {
+            "name": "Read a Patient by id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/Patient/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The logical id of the resource."
+              }
+            ]
+          },
+          "docs": "Read a Patient by id."
+        },
+        {
+          "info": {
+            "name": "Replace a Patient by id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.zusapi.com/fhir/Patient/:id",
+            "headers": [
+              {
+                "name": "Zus-If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The logical id of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace an existing Patient. Version-aware writes are supported via the Zus-If-Match header."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

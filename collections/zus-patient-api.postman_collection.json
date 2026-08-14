@@ -1,0 +1,537 @@
+{
+  "item": [
+    {
+      "id": "dc395297-806d-42b8-9dcd-73e333e393cd",
+      "name": "Patient",
+      "description": {
+        "content": "FHIR R4 Patient resources.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7acf179d-42c7-4b1f-9fd6-9587270c49a3",
+          "name": "Search Patient resources.",
+          "request": {
+            "name": "Search Patient resources.",
+            "description": {
+              "content": "Search FHIR R4 Patient resources. Supports search parameters including identifier, name, and the Zus universal patient identifier (upid). Returns a FHIR searchset Bundle. Default page size is 10 and can be expanded up to 500.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fhir",
+                "Patient"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "identifier",
+                  "value": "<string>",
+                  "description": "Token search on a Patient identifier (system|value)."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "upid",
+                  "value": "<string>",
+                  "description": "Zus universal patient identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa78ea21-e016-46cb-b23d-34bd765a4abf",
+              "name": "A FHIR searchset Bundle.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fhir",
+                    "Patient"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "upid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_count",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"type\": \"searchset\",\n  \"total\": 5791\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1de9ebc3-8005-4af7-85e3-a0b002e8e1ce",
+          "name": "Create a Patient resource.",
+          "request": {
+            "name": "Create a Patient resource.",
+            "description": {
+              "content": "Create a FHIR R4 Patient. Setting Patient.active to true is the primary signal of an active treatment relationship and authorizes access to the patient's aggregated third-party data. Zus interprets a NULL value for Patient.active as false.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fhir",
+                "Patient"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"<string>\",\n  \"id\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"identifier\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"name\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"gender\": \"<string>\",\n  \"birthDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d857245-5583-4f72-a83d-466683444484",
+              "name": "Patient created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fhir",
+                    "Patient"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resourceType\": \"Patient\",\n  \"id\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"identifier\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"name\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"gender\": \"<string>\",\n  \"birthDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Patient\",\n  \"id\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"identifier\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"name\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"gender\": \"<string>\",\n  \"birthDate\": \"<date>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11385f4c-d28c-4b14-b026-05fe7a9ad419",
+          "name": "Read a Patient by id.",
+          "request": {
+            "name": "Read a Patient by id.",
+            "description": {},
+            "url": {
+              "path": [
+                "fhir",
+                "Patient",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The logical id of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f364496-3a42-4e8e-8561-1c13c3dd94d7",
+              "name": "The requested Patient resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fhir",
+                    "Patient",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The logical id of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Patient\",\n  \"id\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"identifier\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"name\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"gender\": \"<string>\",\n  \"birthDate\": \"<date>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "303dcb4c-e525-49fe-997f-d71e0fe2eb12",
+              "name": "Patient not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fhir",
+                    "Patient",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The logical id of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf70a154-605c-4414-94c4-95f9f06341cc",
+          "name": "Replace a Patient by id.",
+          "request": {
+            "name": "Replace a Patient by id.",
+            "description": {
+              "content": "Replace an existing Patient. Version-aware writes are supported via the Zus-If-Match header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fhir",
+                "Patient",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The logical id of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Version-aware write precondition.",
+                "key": "Zus-If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"<string>\",\n  \"id\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"identifier\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"name\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"gender\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"key_0\": 7625,\n  \"key_1\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d8517a92-4750-421d-9c96-d891c467b4bf",
+              "name": "Patient updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fhir",
+                    "Patient",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The logical id of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Version-aware write precondition.",
+                    "key": "Zus-If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resourceType\": \"Patient\",\n  \"id\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"identifier\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"name\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"gender\": \"<string>\",\n  \"birthDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Patient\",\n  \"id\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"identifier\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"name\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"gender\": \"<string>\",\n  \"birthDate\": \"<date>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.zusapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2476cfef-c365-46d1-8444-d3122da1aee6",
+    "name": "Zus Health Auth Patient API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform. Provides access to Patient resources, the Zus Aggregated Profile (ZAP) via Patient History jobs, general FHIR resources, document ingestion and retrieval through DocumentReference and Binary, and OAuth2 token issuance. All requests are authenticated with an OAuth2 Bearer access token. Endpoints and behavior are derived from the public Zus documentation at https://docs.zushealth.com; production hostnames use api.zusapi.com and the sandbox uses api.sandbox.zusapi.com / auth.sandbox.zusapi.com.\n\nContact Support:\n Name: Zus Health",
+      "type": "text/plain"
+    }
+  }
+}

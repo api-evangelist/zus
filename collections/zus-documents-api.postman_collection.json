@@ -1,0 +1,237 @@
+{
+  "item": [
+    {
+      "id": "1eb8625f-10db-4d89-819b-702bae3ac0cf",
+      "name": "Documents",
+      "description": {
+        "content": "DocumentReference and Binary resources.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8225285d-6faa-43f8-8b17-c7e52e8b0da3",
+          "name": "Read a DocumentReference by id.",
+          "request": {
+            "name": "Read a DocumentReference by id.",
+            "description": {
+              "content": "Retrieve a FHIR R4 DocumentReference. Narrative content (text.div) is treated as opaque and is not validated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fhir",
+                "DocumentReference",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The logical id of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b3f8b57-e11b-436d-b4ff-2f6fb48a10d0",
+              "name": "The requested DocumentReference.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fhir",
+                    "DocumentReference",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The logical id of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"string\",\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "058fdd42-6b84-4b7d-ba54-35d493a333cd",
+          "name": "Read a Binary resource by id.",
+          "request": {
+            "name": "Read a Binary resource by id.",
+            "description": {
+              "content": "Retrieve a FHIR R4 Binary resource. The base64-encoded Binary.data payload is stored as submitted and is not run through instance validation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fhir",
+                "Binary",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The logical id of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2fd797f4-4ab7-4dff-8664-7bb6dfed83d8",
+              "name": "The requested Binary resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fhir",
+                    "Binary",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The logical id of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"string\",\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.zusapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ba736ef8-220d-4f70-ad0f-bfbe5996b9ab",
+    "name": "Zus Health Auth Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform. Provides access to Patient resources, the Zus Aggregated Profile (ZAP) via Patient History jobs, general FHIR resources, document ingestion and retrieval through DocumentReference and Binary, and OAuth2 token issuance. All requests are authenticated with an OAuth2 Bearer access token. Endpoints and behavior are derived from the public Zus documentation at https://docs.zushealth.com; production hostnames use api.zusapi.com and the sandbox uses api.sandbox.zusapi.com / auth.sandbox.zusapi.com.\n\nContact Support:\n Name: Zus Health",
+      "type": "text/plain"
+    }
+  }
+}

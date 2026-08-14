@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zus Health Auth Documents API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read a DocumentReference by id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/DocumentReference/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The logical id of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieve a FHIR R4 DocumentReference. Narrative content (text.div) is treated as opaque and is not validated."
+        },
+        {
+          "info": {
+            "name": "Read a Binary resource by id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zusapi.com/fhir/Binary/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The logical id of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieve a FHIR R4 Binary resource. The base64-encoded Binary.data payload is stored as submitted and is not run through instance validation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

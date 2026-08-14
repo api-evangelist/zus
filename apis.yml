@@ -2,11 +2,10 @@ aid: zus
 url: https://raw.githubusercontent.com/api-evangelist/zus/refs/heads/main/apis.yml
 name: Zus Health
 kind: company
-description: Zus Health is a shared health-data platform that aggregates a patient's
-  clinical history from external networks into the Zus Aggregated Profile (ZAP). It
-  exposes a FHIR R4 (v4.0.1) REST API secured with OAuth2 Bearer tokens, Patient History
-  APIs, document ingestion and retrieval, Zushooks webhooks, a GraphQL FHIR Query
-  Service, and embeddable open-source React components.
+description: Zus Health is a shared health-data platform that aggregates a patient's clinical history
+  from external networks into the Zus Aggregated Profile (ZAP). It exposes a FHIR R4 (v4.0.1) REST API
+  secured with OAuth2 Bearer tokens, Patient History APIs, document ingestion and retrieval, Zushooks
+  webhooks, a GraphQL FHIR Query Service, and embeddable open-source React components.
 accessModel:
   pricing: free
   onboarding: self-serve
@@ -151,6 +150,31 @@ apis:
     url: https://docs.zushealth.com/docs/ingesting-documents
   - type: Documentation
     url: https://docs.zushealth.com/docs/zushooks
+- name: Zus FHIR & Platform API
+  description: Zus FHIR R4 REST API plus Auth Service and Patient History APIs. Implements FHIR R4 (v4.0.1)
+    across 128 resource types with instance-level CRUD, transaction Bundles, conditional create/update/delete
+    by identifier, and version-aware writes via the Zus-If-Match ETag header. OAuth 2.0 bearer authentication;
+    machine-to-machine app clients supported.
+  humanURL: https://docs.zushealth.com/docs/fhir-api
+  baseURL: https://api.zusapi.com/fhir
+  properties:
+  - type: APIReference
+    url: https://docs.zushealth.com/reference/general
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/fhir-rest-api-capabilities
+  - type: Conformance
+    url: conformance/zus-fhir-capabilitystatement.json
+- name: Zus FHIR GraphQL API (FQS)
+  description: The Zus FHIR Query Service (FQS) is a read-only GraphQL API over the FHIR data model, exposed
+    at a single endpoint. Supports UPID-scoped (one-human) and builder-scoped queries across resource
+    types in the Designated Record Set. Uses the same OAuth 2.0 bearer token as the REST API. Beta.
+  humanURL: https://docs.zushealth.com/docs/graphql-api
+  baseURL: https://fqs.zusapi.com/query
+  properties:
+  - type: APIReference
+    url: https://fqs-docs.zusapi.com/
+  - type: Documentation
+    url: https://docs.zushealth.com/docs/graphql-api
 common:
 - type: AgenticAccess
   url: agentic-access/zus-agentic-access.yml
@@ -172,6 +196,96 @@ common:
   url: finops/zus-finops.yml
 - url: https://zushealth.com/feed/
   type: Blog
+- type: DeveloperPortal
+  url: https://docs.zushealth.com/docs
+- type: Documentation
+  url: https://docs.zushealth.com/docs/intro-to-zus
+- type: APIReference
+  url: https://docs.zushealth.com/reference/general
+- type: GettingStarted
+  url: https://docs.zushealth.com/docs/getting-started-with-the-zap
+- type: Support
+  url: https://docs.zushealth.com/contact-support
+- type: Blog
+  url: https://zushealth.com/team/blog/
+- type: GitHubOrganization
+  url: https://github.com/zushealth
+- type: SignUp
+  url: https://docs.zushealth.com/page/sign-up
+- type: Login
+  url: https://app.zushealth.com
+- type: TermsOfService
+  url: https://zushealth.com/website-terms-of-use/
+- type: PrivacyPolicy
+  url: https://zushealth.com/website-privacy-policy/
+- type: StatusPage
+  url: https://status.zusapi.com/
+- type: Postman
+  url: https://www.postman.com/zus-health/workspace/zus-health-workspace
+- type: Compliance
+  url: https://zushealth.com/platform/
+- type: LLMsTxt
+  url: llms/zus-llms.txt
+- type: Authentication
+  url: authentication/zus-authentication.yml
+- type: Conventions
+  url: conventions/zus-conventions.yml
+- type: Idempotency
+  url: conventions/zus-conventions.yml
+- type: Lifecycle
+  url: lifecycle/zus-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/zus-lifecycle.yml
+- type: ChangeLog
+  url: changelog/zus-changelog.yml
+- type: Webhooks
+  url: asyncapi/zus-zushooks.yml
+- type: Conformance
+  url: conformance/zus-conformance.yml
+- type: ErrorCatalog
+  url: errors/zus-problem-types.yml
+- type: DomainSecurity
+  url: security/zus-domain-security.yml
+- type: MCPServer
+  url: mcp/zus-mcp.yml
+- type: DataModel
+  url: data-model/zus-data-model.yml
+- type: Sandbox
+  url: sandbox/zus-sandbox.yml
+- type: Components
+  url: components/zus-components.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/zus-llms.txt
+- type: Authentication
+  url: authentication/zus-authentication.yml
+- type: Conventions
+  url: conventions/zus-conventions.yml
+- type: Idempotency
+  url: conventions/zus-conventions.yml
+- type: Lifecycle
+  url: lifecycle/zus-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/zus-lifecycle.yml
+- type: ChangeLog
+  url: changelog/zus-changelog.yml
+- type: Webhooks
+  url: asyncapi/zus-zushooks.yml
+- type: Conformance
+  url: conformance/zus-conformance.yml
+- type: ErrorCatalog
+  url: errors/zus-problem-types.yml
+- type: DomainSecurity
+  url: security/zus-domain-security.yml
+- type: MCPServer
+  url: mcp/zus-mcp.yml
+- type: DataModel
+  url: data-model/zus-data-model.yml
+- type: Sandbox
+  url: sandbox/zus-sandbox.yml
+- type: Components
+  url: components/zus-components.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
