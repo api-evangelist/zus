@@ -36,6 +36,8 @@ apis:
   humanURL: https://docs.zushealth.com/docs/fhir-api
   baseURL: https://api.zusapi.com/fhir
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
