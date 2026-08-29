@@ -6,6 +6,18 @@ description: Zus Health is a shared health-data platform that aggregates a patie
   from external networks into the Zus Aggregated Profile (ZAP). It exposes a FHIR R4 (v4.0.1) REST API
   secured with OAuth2 Bearer tokens, Patient History APIs, document ingestion and retrieval, Zushooks
   webhooks, a GraphQL FHIR Query Service, and embeddable open-source React components.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve
