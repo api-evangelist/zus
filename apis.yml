@@ -124,6 +124,8 @@ apis:
   humanURL: https://docs.zushealth.com/docs/fhir-api
   baseURL: https://api.zusapi.com/fhir
   tags:
+  - Patients
+  tags_raw:
   - Patient
   properties:
   - type: OpenAPI
