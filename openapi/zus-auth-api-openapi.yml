@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Zus Health Auth API
-  description: FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform. Provides access to Patient resources, the Zus Aggregated Profile (ZAP) via Patient History jobs, general FHIR resources, document ingestion and retrieval through DocumentReference and Binary, and OAuth2 token issuance. All requests are authenticated with an OAuth2 Bearer access token. Endpoints and behavior are derived from the public Zus documentation at https://docs.zushealth.com; production hostnames use api.zusapi.com and the sandbox uses api.sandbox.zusapi.com / auth.sandbox.zusapi.com.
+  description: FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform.
   termsOfService: https://zushealth.com
   contact:
     name: Zus Health
@@ -28,7 +28,7 @@ paths:
       operationId: createToken
       tags:
       - Auth
-      summary: Issue or exchange an OAuth2 access token.
+      summary: Issue or exchange an OAuth2 access token
       description: Exchange credentials for a Zus access token. Supports the authorization_code (with PKCE) grant and the RFC 8693 token-exchange grant (grant_type urn:ietf:params:oauth:grant-type:token-exchange) for exchanging a third-party IdP ID token. Access tokens are valid for one hour (expires_in 3600). The token endpoint is rate limited to 200 requests per hour per App Client.
       security: []
       requestBody:

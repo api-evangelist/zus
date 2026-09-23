@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Zus Health Auth Patient API
-  description: FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform. Provides access to Patient resources, the Zus Aggregated Profile (ZAP) via Patient History jobs, general FHIR resources, document ingestion and retrieval through DocumentReference and Binary, and OAuth2 token issuance. All requests are authenticated with an OAuth2 Bearer access token. Endpoints and behavior are derived from the public Zus documentation at https://docs.zushealth.com; production hostnames use api.zusapi.com and the sandbox uses api.sandbox.zusapi.com / auth.sandbox.zusapi.com.
+  title: Zus Health Patient API
+  description: FHIR R4 (v4.0.1) REST API for the Zus Health shared health-data platform.
   termsOfService: https://zushealth.com
   contact:
     name: Zus Health
@@ -23,7 +23,7 @@ paths:
       operationId: searchPatients
       tags:
       - Patient
-      summary: Search Patient resources.
+      summary: Search Patient resources
       description: Search FHIR R4 Patient resources. Supports search parameters including identifier, name, and the Zus universal patient identifier (upid). Returns a FHIR searchset Bundle. Default page size is 10 and can be expanded up to 500.
       parameters:
       - name: identifier
@@ -57,7 +57,7 @@ paths:
       operationId: createPatient
       tags:
       - Patient
-      summary: Create a Patient resource.
+      summary: Create a Patient resource
       description: Create a FHIR R4 Patient. Setting Patient.active to true is the primary signal of an active treatment relationship and authorizes access to the patient's aggregated third-party data. Zus interprets a NULL value for Patient.active as false.
       requestBody:
         required: true
@@ -77,7 +77,7 @@ paths:
       operationId: readPatient
       tags:
       - Patient
-      summary: Read a Patient by id.
+      summary: Read a Patient by id
       parameters:
       - $ref: '#/components/parameters/ResourceId'
       responses:
@@ -93,7 +93,7 @@ paths:
       operationId: updatePatient
       tags:
       - Patient
-      summary: Replace a Patient by id.
+      summary: Replace a Patient by id
       description: Replace an existing Patient. Version-aware writes are supported via the Zus-If-Match header.
       parameters:
       - $ref: '#/components/parameters/ResourceId'
