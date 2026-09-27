@@ -127,15 +127,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Bundle'
 components:
-  parameters:
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The logical id of the resource.
   schemas:
+    Resource:
+      type: object
+      description: A generic FHIR R4 resource.
+      properties:
+        resourceType:
+          type: string
+        id:
+          type: string
+      additionalProperties: true
     Bundle:
       type: object
       properties:
@@ -152,15 +153,14 @@ components:
           items:
             type: object
       additionalProperties: true
-    Resource:
-      type: object
-      description: A generic FHIR R4 resource.
-      properties:
-        resourceType:
-          type: string
-        id:
-          type: string
-      additionalProperties: true
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The logical id of the resource.
   securitySchemes:
     bearerAuth:
       type: http
