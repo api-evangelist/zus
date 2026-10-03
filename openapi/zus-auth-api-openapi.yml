@@ -48,6 +48,19 @@ paths:
           description: Invalid credentials.
 components:
   schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+          example: 3600
+        scope:
+          type: string
     TokenRequest:
       type: object
       required:
@@ -72,19 +85,6 @@ components:
         scope:
           type: string
           example: openid profile email
-    TokenResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-        token_type:
-          type: string
-          example: Bearer
-        expires_in:
-          type: integer
-          example: 3600
-        scope:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http
