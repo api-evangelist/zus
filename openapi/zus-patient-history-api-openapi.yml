@@ -67,6 +67,16 @@ paths:
                 $ref: '#/components/schemas/PatientHistoryJob'
 components:
   schemas:
+    PatientHistoryJob:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          example: running
+        patient:
+          type: object
     PatientHistoryJobRequest:
       type: object
       properties:
@@ -79,16 +89,6 @@ components:
         config:
           type: object
           description: Job configuration options.
-    PatientHistoryJob:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-          example: running
-        patient:
-          type: object
   securitySchemes:
     bearerAuth:
       type: http

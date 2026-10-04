@@ -128,15 +128,6 @@ paths:
                 $ref: '#/components/schemas/Bundle'
 components:
   schemas:
-    Resource:
-      type: object
-      description: A generic FHIR R4 resource.
-      properties:
-        resourceType:
-          type: string
-        id:
-          type: string
-      additionalProperties: true
     Bundle:
       type: object
       properties:
@@ -152,6 +143,15 @@ components:
           type: array
           items:
             type: object
+      additionalProperties: true
+    Resource:
+      type: object
+      description: A generic FHIR R4 resource.
+      properties:
+        resourceType:
+          type: string
+        id:
+          type: string
       additionalProperties: true
   parameters:
     ResourceId:

@@ -116,14 +116,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Patient'
 components:
-  parameters:
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The logical id of the resource.
   schemas:
     Bundle:
       type: object
@@ -167,6 +159,14 @@ components:
           type: string
           format: date
       additionalProperties: true
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The logical id of the resource.
   securitySchemes:
     bearerAuth:
       type: http
