@@ -1,4 +1,4 @@
-# Zus Health (zus)
+# Zus Health
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,137 +66,148 @@
 
 Zus Health is a shared health-data platform that aggregates a patient's clinical history from external networks into the Zus Aggregated Profile (ZAP). It exposes a FHIR R4 (v4.0.1) REST API secured with OAuth2 Bearer tokens, Patient History APIs, document ingestion and retrieval, Zushooks webhooks, a GraphQL FHIR Query Service, and embeddable open-source React components.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/zus/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/zus/refs/heads/main/apis.yml)
+**Areas:** Health · FHIR · Interoperability · Patient Data · Healthcare
 
-## Tags
+## Zus Health on APIs.io
 
-- Health
-- FHIR
-- Interoperability
-- Patient Data
-- Healthcare
+Everything profiled for Zus Health is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/zus/](https://apis.io/providers/zus/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (7)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [Zus Health Auth API](https://apis.io/apis/zus/zus-auth-api/) — OAuth2 token issuance and exchange.
+- [Zus Health Documents API](https://apis.io/apis/zus/zus-documents-api/) — DocumentReference and Binary resources.
+- [Zus Health FHIR API](https://apis.io/apis/zus/zus-fhir-api/) — General FHIR R4 resources.
+- [Zus Health Patient API](https://apis.io/apis/zus/zus-patient-api/) — FHIR R4 Patient resources.
+- [Zus Health Patient History API](https://apis.io/apis/zus/zus-patient-history-api/) — Jobs that retrieve external data into the Zus Aggregated Profile.
+- [Zus FHIR & Platform API](https://apis.io/apis/zus/zus-fhir-platform-api/) — Zus FHIR R4 REST API plus Auth Service and Patient History APIs. Implements FHIR R4 (v4.0.1) across 128 resource types with instance-level CRUD, transaction…
+- [Zus FHIR GraphQL API (FQS)](https://apis.io/apis/zus/zus-fhir-graphql-api-fqs/) — The Zus FHIR Query Service (FQS) is a read-only GraphQL API over the FHIR data model, exposed at a single endpoint. Supports UPID-scoped (one-human) and…
 
-## APIs
+### Published properties
 
-### Zus Patients (FHIR)
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Read, search, create, and update FHIR R4 Patient resources. The Patient.active field is the primary signal of an active treatment relationship and authorizes access to a patient's aggregated third-party data.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://docs.zushealth.com/docs/fhir-api](https://docs.zushealth.com/docs/fhir-api)
-- **Base URL:** `https://api.zusapi.com/fhir`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Zus Zushooks](https://apis.io/asyncapis/zus/zus-zushooks/)
 
-- Patient
-- FHIR
-- Identity
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [Documentation](https://docs.zushealth.com/docs/fhir-api)
-- [API Reference](https://docs.zushealth.com/reference/general)
-- [OpenAPI](openapi/zus-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/zus.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/zus.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [zus-health](https://apis.io/servers/zus/zus-health/)
 
-### Zus Aggregated Profile
+#### Agentic access (1)
 
-The Zus Aggregated Profile (ZAP) assembles a longitudinal record from network partners. Patient History jobs retrieve external data into the FHIR Store, where it is deduplicated and summarized by Zus Lens.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://docs.zushealth.com/docs/accessing-the-zap](https://docs.zushealth.com/docs/accessing-the-zap)
-- **Base URL:** `https://api.zusapi.com`
+- [Zus Agentic Access](https://apis.io/agentic-access/zus/zus-agentic-access/)
 
-#### Tags
+#### Collections (6)
 
-- ZAP
-- Aggregation
-- Patient History
+Postman and Open Collection request collections.
 
-#### Properties
+- [Zus Health API](https://apis.io/collections/zus/open-zus/)
+- [Zus Health Auth API](https://apis.io/collections/zus/open-zus-auth-api/)
+- [Zus Health Auth Documents API](https://apis.io/collections/zus/open-zus-documents-api/)
+- [Zus Health Auth FHIR API](https://apis.io/collections/zus/open-zus-fhir-api/)
+- [Zus Health Auth Patient API](https://apis.io/collections/zus/open-zus-patient-api/)
+- [Zus Health Auth Patient History API](https://apis.io/collections/zus/open-zus-patient-history-api/)
 
-- [Documentation](https://docs.zushealth.com/docs/accessing-the-zap)
-- [Documentation](https://docs.zushealth.com/docs/zap-basics)
-- [OpenAPI](openapi/zus-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/zus.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/zus.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (2)
 
-### Zus FHIR Resources
+Authentication, trust centre, and vulnerability disclosure.
 
-Store and retrieve most FHIR R4 (v4.0.1) resource types - Observation, Condition, Encounter, MedicationStatement, Procedure, DiagnosticReport, and more - with read, search, create, update, patch, delete, and Bundle transactions.
+- [Zus Authentication](https://apis.io/security/zus/zus-authentication/)
+- [Zus Domain Security](https://apis.io/security/zus/zus-domain-security/)
 
-- **Human URL:** [https://docs.zushealth.com/docs/fhir-rest-api-capabilities](https://docs.zushealth.com/docs/fhir-rest-api-capabilities)
-- **Base URL:** `https://api.zusapi.com/fhir`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- FHIR
-- Resources
-- R4
+- [Zus Plans Pricing](https://apis.io/plans/zus/zus-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://docs.zushealth.com/docs/fhir-rest-api-capabilities)
-- [API Reference](https://docs.zushealth.com/reference/general)
-- [OpenAPI](openapi/zus-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/zus.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/zus.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### Zus Document Retrieval
+- [Zus Rate Limits](https://apis.io/rate-limits/zus/zus-rate-limits/)
 
-Ingest CDA and PDF documents and retrieve clinical documents through the FHIR DocumentReference and Binary resources, including base64-encoded payloads stored as submitted.
+#### FinOps (1)
 
-- **Human URL:** [https://docs.zushealth.com/docs/ingesting-documents](https://docs.zushealth.com/docs/ingesting-documents)
-- **Base URL:** `https://api.zusapi.com/fhir`
+What the API costs to run, by operation.
 
-#### Tags
+- [Zus Finops](https://apis.io/finops/zus/zus-finops/)
 
-- Documents
-- DocumentReference
-- Binary
+## Where to find this API
 
-#### Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [Documentation](https://docs.zushealth.com/docs/ingesting-documents)
-- [API Reference](https://docs.zushealth.com/reference/general)
-- [OpenAPI](openapi/zus-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/zus.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/zus.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Zus Subscriptions and Webhooks
-
-Zushooks deliver inbound HTTPS callbacks when patient data is created or updated in the Zus FHIR Store - ADT events, medication pickups, lab results, and status changes - filtered by JQ criteria and authenticated with basic auth or OAuth client credentials.
-
-- **Human URL:** [https://docs.zushealth.com/docs/zushooks](https://docs.zushealth.com/docs/zushooks)
-- **Base URL:** `https://api.zusapi.com`
-
-#### Tags
-
-- Webhooks
-- Subscriptions
-- Zushooks
-
-#### Properties
-
-- [Documentation](https://docs.zushealth.com/docs/zushooks)
-- [OpenAPI](openapi/zus-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/zus.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/zus.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/zushealth)
 - [Website](https://zushealth.com)
 - [Documentation](https://docs.zushealth.com)
-- [Plans](plans/zus-plans-pricing.yml)
-- [Rate Limits](rate-limits/zus-rate-limits.yml)
-- [Fin Ops](finops/zus-finops.yml)
+- [Getting started](https://docs.zushealth.com/docs/getting-started-with-the-zap)
+- [API reference](https://docs.zushealth.com/reference/general)
+- [Sign up](https://docs.zushealth.com/page/sign-up)
+- [Support](https://docs.zushealth.com/contact-support)
+- [Blog](https://zushealth.com/feed/)
+- [Compliance](https://zushealth.com/platform/)
+- [Terms of service](https://zushealth.com/website-terms-of-use/)
+- [Privacy policy](https://zushealth.com/website-privacy-policy/)
+- [GitHub](https://github.com/zushealth)
+- [Status](https://status.zusapi.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 50.8** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 57.3 |
+| Contract governance | 18.2 |
+| Operational transparency | 57.9 |
+| Developer ergonomics | 47.0 |
+| Access clarity | 40.8 |
+
+**Agent readiness 31.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 29.7** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/zus/](https://apis.io/providers/zus/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Zus Health: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/zus/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
